@@ -1,6 +1,10 @@
+import { useState } from "react";
 import PlusIcon from "../icons/PlusIcon";
+import { Column } from "../types/types";
 
 function KanbanBoard() {
+  const [columns, setColumns] = useState<Column[]>([]);
+  console.log("columns", columns);
   return (
     <div
       className="
@@ -16,6 +20,7 @@ function KanbanBoard() {
     >
       <div className="m-auto">
         <button
+          onClick={() => createNewColumn()}
           className="
             h-[60px]
             w-[350px]
@@ -38,6 +43,18 @@ function KanbanBoard() {
       </div>
     </div>
   );
+
+  function createNewColumn() {
+    const addColumn: Column = {
+      id: generateId(),
+      title: `Column ${columns.length + 1}`,
+    };
+    setColumns([...columns, addColumn]);
+  }
+}
+
+function generateId() {
+  return Math.floor(Math.random() * 10001);
 }
 
 export default KanbanBoard;

@@ -5,11 +5,21 @@ interface Props {
   id: Id;
   title: string;
   deleteColumn: (id: Id) => void;
+  attributes?: object | undefined;
+  listeners?: object | undefined;
 }
 
-function KanbanHeader({ id, title, deleteColumn }: Props) {
+function KanbanHeader({
+  id,
+  title,
+  deleteColumn,
+  attributes,
+  listeners,
+}: Props) {
   return (
     <div
+      {...attributes}
+      {...listeners}
       className="
     flex
     justify-between

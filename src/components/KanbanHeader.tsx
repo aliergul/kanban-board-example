@@ -7,6 +7,9 @@ interface Props {
   deleteColumn: (id: Id) => void;
   attributes?: object | undefined;
   listeners?: object | undefined;
+  editMode: boolean;
+  setEditMode: (editMode: boolean) => void;
+  updateColumn: (id: Id, title: string) => void;
 }
 
 function KanbanHeader({
@@ -15,6 +18,9 @@ function KanbanHeader({
   deleteColumn,
   attributes,
   listeners,
+  editMode,
+  setEditMode,
+  updateColumn,
 }: Props) {
   return (
     <div
@@ -35,10 +41,12 @@ function KanbanHeader({
   "
     >
       <div
+        onClick={() => setEditMode(true)}
         className="
         flex
         gap-2
         items-center
+        hover:cursor-text
       "
       >
         <div
@@ -55,7 +63,29 @@ function KanbanHeader({
         >
           0
         </div>
-        {title}
+        {!editMode ? (
+          title
+        ) : (
+          <input
+            autoFocus
+            value={title}
+            onChange={(e) => updateColumn(id, e.target.value)}
+            onBlur={() => setEditMode(false)}
+            onKeyDown={(e) => {
+              if (e.key !== "Enter") return;
+              setEditMode(false);
+            }}
+            className="
+                bg-black
+                focus:border-rose-500
+                border
+                rounded
+                outline-none
+                px-2
+                w-[250px]
+            "
+          />
+        )}
       </div>
       <button
         onClick={() => deleteColumn(id)}

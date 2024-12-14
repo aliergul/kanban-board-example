@@ -4,13 +4,16 @@ import KanbanContent from "./KanbanContent";
 import KanbanFooter from "./KanbanFooter";
 import KanbanHeader from "./KanbanHeader";
 import { CSS } from "@dnd-kit/utilities";
+import { useState } from "react";
 
 interface Props {
   column: Column;
   deleteColumn: (id: Id) => void;
+  updateColumn: (id: Id, title: string) => void;
 }
 
-function KanbanContainer({ column, deleteColumn }: Props) {
+function KanbanContainer({ column, deleteColumn, updateColumn }: Props) {
+  const [editMode, setEditMode] = useState<boolean>(false);
   const {
     setNodeRef,
     attributes,
@@ -24,6 +27,7 @@ function KanbanContainer({ column, deleteColumn }: Props) {
       type: "Column",
       column,
     },
+    disabled: editMode,
   });
 
   const style = {
@@ -72,6 +76,9 @@ function KanbanContainer({ column, deleteColumn }: Props) {
         deleteColumn={deleteColumn}
         attributes={{ ...attributes }}
         listeners={{ ...listeners }}
+        editMode={editMode}
+        setEditMode={setEditMode}
+        updateColumn={updateColumn}
       />
       <KanbanContent />
       <KanbanFooter />

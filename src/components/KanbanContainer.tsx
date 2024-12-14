@@ -1,5 +1,5 @@
 import { useSortable } from "@dnd-kit/sortable";
-import { Column, Id } from "../types/types";
+import { Column, Id, Task } from "../types/types";
 import KanbanContent from "./KanbanContent";
 import KanbanFooter from "./KanbanFooter";
 import KanbanHeader from "./KanbanHeader";
@@ -10,9 +10,17 @@ interface Props {
   column: Column;
   deleteColumn: (id: Id) => void;
   updateColumn: (id: Id, title: string) => void;
+  createTask: (columnId: Id) => void;
+  tasks: Task[];
 }
 
-function KanbanContainer({ column, deleteColumn, updateColumn }: Props) {
+function KanbanContainer({
+  column,
+  deleteColumn,
+  updateColumn,
+  createTask,
+  tasks,
+}: Props) {
   const [editMode, setEditMode] = useState<boolean>(false);
   const {
     setNodeRef,
@@ -80,8 +88,8 @@ function KanbanContainer({ column, deleteColumn, updateColumn }: Props) {
         setEditMode={setEditMode}
         updateColumn={updateColumn}
       />
-      <KanbanContent />
-      <KanbanFooter />
+      <KanbanContent tasks={tasks} />
+      <KanbanFooter columnId={column.id} createTask={createTask} />
     </div>
   );
 }

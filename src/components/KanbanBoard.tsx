@@ -1,10 +1,25 @@
 import { useState } from "react";
 import PlusIcon from "../icons/PlusIcon";
-import { Column } from "../types/types";
+import { Column, Id } from "../types/types";
+import KanbanContainer from "./KanbanContainer";
+import generateId from "../utils/generateId";
 
 function KanbanBoard() {
   const [columns, setColumns] = useState<Column[]>([]);
-  console.log("columns", columns);
+
+  function createNewColumn() {
+    const addColumn: Column = {
+      id: generateId(),
+      title: `Column ${columns.length + 1}`,
+    };
+    setColumns([...columns, addColumn]);
+  }
+
+  function deleteColumn(id: Id) {
+    const filteredColumns = columns.filter((column) => column.id !== id);
+    setColumns(filteredColumns);
+  }
+
   return (
     <div
       className="
@@ -18,7 +33,22 @@ function KanbanBoard() {
         px-[40px]
     "
     >
-      <div className="m-auto">
+      <div className="m-auto flex gap-4">
+        <div
+          className="
+          flex
+          gap-4
+        "
+        >
+          {columns.map((column, i) => (
+            <KanbanContainer
+              key={i}
+              column={column}
+              deleteColumn={deleteColumn}
+            />
+          ))}
+        </div>
+
         <button
           onClick={() => createNewColumn()}
           className="
@@ -43,18 +73,6 @@ function KanbanBoard() {
       </div>
     </div>
   );
-
-  function createNewColumn() {
-    const addColumn: Column = {
-      id: generateId(),
-      title: `Column ${columns.length + 1}`,
-    };
-    setColumns([...columns, addColumn]);
-  }
-}
-
-function generateId() {
-  return Math.floor(Math.random() * 10001);
 }
 
 export default KanbanBoard;

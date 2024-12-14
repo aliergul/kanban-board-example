@@ -1,4 +1,6 @@
+export type Id = string | number;
+
 export type Column = {
-  id: string | number;
+  id: Id;
   title: string;
 };

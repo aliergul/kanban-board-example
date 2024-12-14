@@ -13,6 +13,7 @@ interface Props {
   createTask: (columnId: Id) => void;
   tasks: Task[];
   deleteTask: (taskId: Id) => void;
+  updateTask: (taskId: Id, content: string) => void;
 }
 
 function KanbanContainer({
@@ -22,6 +23,7 @@ function KanbanContainer({
   createTask,
   tasks,
   deleteTask,
+  updateTask,
 }: Props) {
   const [editMode, setEditMode] = useState<boolean>(false);
   const {
@@ -90,7 +92,11 @@ function KanbanContainer({
         setEditMode={setEditMode}
         updateColumn={updateColumn}
       />
-      <KanbanContent tasks={tasks} deleteTask={deleteTask} />
+      <KanbanContent
+        tasks={tasks}
+        deleteTask={deleteTask}
+        updateTask={updateTask}
+      />
       <KanbanFooter columnId={column.id} createTask={createTask} />
     </div>
   );

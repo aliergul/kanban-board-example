@@ -4,9 +4,10 @@ import TaskCard from "./TaskCard";
 interface Props {
   tasks: Task[];
   deleteTask: (taskId: Id) => void;
+  updateTask: (taskId: Id, content: string) => void;
 }
 
-function KanbanContent({ tasks, deleteTask }: Props) {
+function KanbanContent({ tasks, deleteTask, updateTask }: Props) {
   return (
     <div
       className="
@@ -20,7 +21,12 @@ function KanbanContent({ tasks, deleteTask }: Props) {
   "
     >
       {tasks.map((task, index) => (
-        <TaskCard key={index} task={task} deleteTask={deleteTask} />
+        <TaskCard
+          key={index}
+          task={task}
+          deleteTask={deleteTask}
+          updateTask={updateTask}
+        />
       ))}
     </div>
   );

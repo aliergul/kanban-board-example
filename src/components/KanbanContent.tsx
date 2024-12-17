@@ -1,5 +1,7 @@
+import { SortableContext } from "@dnd-kit/sortable";
 import { Id, Task } from "../types/types";
 import TaskCard from "./TaskCard";
+import { useMemo } from "react";
 
 interface Props {
   tasks: Task[];
@@ -8,6 +10,9 @@ interface Props {
 }
 
 function KanbanContent({ tasks, deleteTask, updateTask }: Props) {
+  const tasksIds = useMemo(() => {
+    return tasks.map((task) => task.id);
+  }, [tasks]);
   return (
     <div
       className="
@@ -20,14 +25,16 @@ function KanbanContent({ tasks, deleteTask, updateTask }: Props) {
     overflow-y-auto
   "
     >
-      {tasks.map((task, index) => (
-        <TaskCard
-          key={index}
-          task={task}
-          deleteTask={deleteTask}
-          updateTask={updateTask}
-        />
-      ))}
+      <SortableContext items={tasksIds}>
+        {tasks.map((task, index) => (
+          <TaskCard
+            key={index}
+            task={task}
+            deleteTask={deleteTask}
+            updateTask={updateTask}
+          />
+        ))}
+      </SortableContext>
     </div>
   );
 }

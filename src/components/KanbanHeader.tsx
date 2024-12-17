@@ -10,6 +10,7 @@ interface Props {
   editMode: boolean;
   setEditMode: (editMode: boolean) => void;
   updateColumn: (id: Id, title: string) => void;
+  index?: number | undefined;
 }
 
 function KanbanHeader({
@@ -21,6 +22,7 @@ function KanbanHeader({
   editMode,
   setEditMode,
   updateColumn,
+  index,
 }: Props) {
   return (
     <div
@@ -61,7 +63,7 @@ function KanbanHeader({
             rounded-full
         "
         >
-          0
+          {index}
         </div>
         {!editMode ? (
           title

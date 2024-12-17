@@ -14,6 +14,7 @@ interface Props {
   tasks: Task[];
   deleteTask: (taskId: Id) => void;
   updateTask: (taskId: Id, content: string) => void;
+  index?: number | undefined;
 }
 
 function KanbanContainer({
@@ -24,6 +25,7 @@ function KanbanContainer({
   tasks,
   deleteTask,
   updateTask,
+  index,
 }: Props) {
   const [editMode, setEditMode] = useState<boolean>(false);
   const {
@@ -91,6 +93,7 @@ function KanbanContainer({
         editMode={editMode}
         setEditMode={setEditMode}
         updateColumn={updateColumn}
+        index={index}
       />
       <KanbanContent
         tasks={tasks}

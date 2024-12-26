@@ -1,7 +1,7 @@
 
 # Basic Kanban Board
 
-Bu projede Vite ile bir React (TypeScript) projesi oluşturarak basit bir Kanban Board örneği oluşturdum. Buradaki amaç kategorileri ve taskları, drag & drop özellikleri ile kullanmaktı.
+Bu projede Vite ile bir React (TypeScript) projesi oluşturarak basit bir Kanban Board örneği oluşturdum. Buradaki amaç kategorileri ve taskları, *drag & drop* özellikleri ile kullanmaktı.
 
 
 ## 🧩 Kullanılan Teknolojiler - Paketler

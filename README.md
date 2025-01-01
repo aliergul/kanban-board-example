@@ -3,6 +3,7 @@
 
 Bu projede Vite ile bir React (TypeScript) projesi oluşturarak basit bir Kanban Board örneği oluşturdum. Buradaki amaç kategorileri ve taskları, *drag & drop* özellikleri ile kullanmaktı.
 
+https://kanban-board-ali-ergul.netlify.app/
 
 ## 🧩 Kullanılan Teknolojiler - Paketler
 
